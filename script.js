@@ -96,3 +96,39 @@ document.addEventListener('DOMContentLoaded', () => {
     setActiveNav();
     // ... rest of your existing code ...
 });
+
+// Video Gallery Functionality
+function initVideoGallery() {
+    const videoContainers = document.querySelectorAll('.video-container');
+    
+    videoContainers.forEach(container => {
+        const video = container.querySelector('video');
+        const playButton = container.querySelector('.play-button');
+        
+        container.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playButton.style.display = 'none';
+            } else {
+                video.pause();
+                playButton.style.display = 'block';
+            }
+        });
+        
+        video.addEventListener('play', () => {
+            playButton.style.display = 'none';
+        });
+        
+        video.addEventListener('pause', () => {
+            playButton.style.display = 'block';
+        });
+    });
+}
+
+// Call this when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.video-gallery')) {
+        initVideoGallery();
+    }
+    // ... rest of your existing code ...
+});

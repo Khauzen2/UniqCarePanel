@@ -72,3 +72,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Trigger the initial reveal
     revealOnScroll();
 });
+
+// Highlight current page in navigation
+function setActiveNav() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href').split('/').pop();
+        if (currentPage === 'index.html' && linkPage === 'index.html') {
+            // Skip highlighting home link when on home page
+        } else if (currentPage.includes(linkPage) || 
+                  (currentPage === 'index.html' && linkPage === '')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
+// Call this when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    setActiveNav();
+    // ... rest of your existing code ...
+});
